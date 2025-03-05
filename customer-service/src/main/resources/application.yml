@@ -1,0 +1,31 @@
+spring:
+  application:
+    name : customer-service
+  cloud:
+    discovery:
+      enabled: false # désactiver la connexion vers discovery service inexistant
+    config:
+      enabled: false # désactiver la connexion vers service de configuration
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/customer-db?createDatabaseIfNotExist=true
+    password: user123
+    username: user
+
+
+
+server:
+  port: 8081
+ 
+
+
+springdoc:
+  api-docs:
+    path: '/api-docs'
+
+swagger-ui:
+  enabled: true
