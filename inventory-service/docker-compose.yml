@@ -1,0 +1,37 @@
+services:
+
+  mysql-product-db:
+    image: mysql:8.0
+    container_name: container_mysql-product-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: product-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user123
+    ports:
+      - "3305:3306"
+    volumes:
+      - product_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+
+
+  phpmyadmin-product-db:
+    container_name: container_phpmyadmin-productdb
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8095:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      PMA_HOST: mysql-product-db
+      PMA_USER: user
+      PMA_PASSWORD: user123
+    depends_on:
+      - mysql-product-db
+    restart: unless-stopped
+
+
+
+volumes:
+  product_mysql_data:
+    driver: local

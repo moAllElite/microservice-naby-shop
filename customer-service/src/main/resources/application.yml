@@ -3,7 +3,7 @@ spring:
     name : customer-service
   cloud:
     discovery:
-      enabled: false # désactiver la connexion vers discovery service inexistant
+      enabled: true # activer la connexion vers discovery service inexistant
     config:
       enabled: false # désactiver la connexion vers service de configuration
   jpa:
