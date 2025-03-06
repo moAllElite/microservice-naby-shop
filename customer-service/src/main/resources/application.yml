@@ -16,7 +16,22 @@ spring:
     password: user123
     username: user
 
+#définir le discovery
+eureka:
+  client:
+    register-with-eureka: true  # Ensure registration is enabled
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
+  instance:
+    prefer-ip-address: true
+# activer tous les endpoints d'actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: '*'
 
 server:
   port: 8081
