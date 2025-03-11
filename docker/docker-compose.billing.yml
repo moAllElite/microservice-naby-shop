@@ -1,0 +1,37 @@
+services:
+
+  mysql-billing-db:
+    image: mysql:8.0
+    container_name: mysql-billing-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: billing-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user123
+    ports:
+      - "3304:3306"
+    volumes:
+      - billing_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+
+
+  phpmyadmin-billing-db:
+    container_name: phpmyadmin-billingdb
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8075:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      PMA_HOST: mysql-billing-db
+      PMA_USER: user
+      PMA_PASSWORD: user123
+    depends_on:
+      - mysql-billing-db
+    restart: unless-stopped
+
+
+
+volumes:
+  billing_mysql_data:
+    driver: local

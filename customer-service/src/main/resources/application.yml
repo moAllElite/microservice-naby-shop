@@ -15,7 +15,9 @@ spring:
     url: jdbc:mysql://localhost:3306/customer-db?createDatabaseIfNotExist=true
     password: user123
     username: user
-
+  docker:
+    compose:
+      enabled: false
 #définir le discovery
 eureka:
   client:
@@ -31,7 +33,7 @@ management:
   endpoints:
     web:
       exposure:
-        exclude: '*'
+        exclude: "*"
 
 server:
   port: 8081
