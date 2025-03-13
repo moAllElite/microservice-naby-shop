@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      server-git-uri:
+  application:
+    name: config-server
+
+server:
+  port: 9999

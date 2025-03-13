@@ -1,0 +1,43 @@
+
+server:
+  port:
+    8090
+spring:
+  application:
+    name: billing-service
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      enabled: false
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3304/billing-db
+    password: user123
+    username: user
+eureka:
+  client:
+    register-with-eureka: true # inscription du microservice
+    fetch-registry: true # inscription du microservice
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+#Activer tous les endpoints d'actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: "*"
+springdoc:
+  api-docs:
+    path: /api-docs
+paytech:
+  api:
+    key: d02a71f918cb82e649725fd0a01df45f5f884b81f5a6da7fe3c3b6babe3a5cbe
+    secret: 2483c69108adade491ac619ed5810f758bb2e5c762faf33d767be7477b1b50d3
